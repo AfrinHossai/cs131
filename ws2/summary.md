@@ -1,2 +1,2 @@
 # Summary
-This file summarizes WS2 git practice.
+Main branch update
