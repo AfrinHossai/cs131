@@ -1,0 +1,26 @@
+Q1: git add notes.md; git commit -m "ws2: add task line"
+Q2: git log --oneline -3
+Q3: 6944c68
+Q4: git revert 6944c68 --no-edit
+Q5:
+head -c 150M /dev/zero > bigdata.bin
+git add bigdata.bin
+git commit -m "ws2: oops added big file"
+git push
+git rm --cached bigdata.bin
+echo "bigdata.bin" >> .gitignore
+git add .gitignore
+git commit --amend --no-edit
+rm bigdata.bin
+git push
+Q6: git switch -c feature-summary
+Q7: echo "# Summary" > summary.md; echo "This file summarizes WS2 git practice." >> summary.md; git add summary.md; git commit -m "ws2: add summary"
+Q8: git diff main..feature-summary
+Q9: git switch main; git merge feature-summary
+Q10: git branch -d feature-summary
+Q11: git merge conflict-branch; conflicted file: summary.md
+Q12: git diff --name-only --diff-filter=U
+Q13: resolved summary.md by keeping both Main branch update and Branch-specific update, and removed conflict markers
+Q14: git add summary.md; git commit -m "Merge conflict-branch into main"; git log --oneline -5
+Q15: git fetch origin; git log HEAD..origin/main --oneline
+Q16: git fetch downloads remote changes but does not merge them into your current branch, while git pull downloads remote changes and merges them into your current branch.
