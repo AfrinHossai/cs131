@@ -1,2 +1,2 @@
 # Summary
-Base conflict line
+Branch-specific update
