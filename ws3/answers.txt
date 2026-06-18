@@ -1,0 +1,21 @@
+ls -l > listing.txt
+date >> listing.txt
+ls /nonexistent_dir 2> errors.txt
+Standard error is file descriptor 2.
+ls /nonexistent_dir /etc > output.txt 2> errors.txt
+ls /nonexistent_dir /etc &> combined.txt
+ls /nonexistent_dir /etc 2>/dev/null
+You see only the /etc output on the terminal because the error message is discarded.
+/dev/null is a special file that throws away anything sent to it.
+sort fruits.txt | uniq
+sort fruits.txt | uniq -c | sort -nr
+grep 'ERROR' server.log | wc -l
+grep 'ERROR' server.log > errors_only.txt
+grep -oE '^[A-Z]+' server.log | sort | uniq -c | sort -nr
+grep -oE '"state":"[A-Z]{2}"' /data/yelp/yelp_academic_dataset_business.json \
+  | cut -d'"' -f4 \
+  | sort \
+  | uniq -c \
+  | sort -nr \
+  | head -5
+
