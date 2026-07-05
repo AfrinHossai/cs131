@@ -1,0 +1,33 @@
+T1
+
+https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c/322a762de6300c6afff4469c9c73b4dd8449d394#file-the-ultimate-bad-ass-bashrc-file-L280
+
+sedit()
+
+The sedit function opens files using an available text editor with administrator privileges. The first if condition uses type -t to check whether jpico is installed; if it is available, the function runs jpico with sudo. The elif conditions check for nano and pico and run the first available editor. If none of those editors are available, the else block uses sudo vim. The "$@" variable passes every argument supplied to sedit to the selected editor.
+
+https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c/322a762de6300c6afff4469c9c73b4dd8449d394#file-the-ultimate-bad-ass-bashrc-file-L294
+
+extract()
+
+The extract function extracts one or more archive files. The for loop processes every filename supplied as an argument. The if condition uses -f to verify that the current argument is a valid regular file. The case statement checks the file extension and selects the appropriate extraction command, such as tar for tar archives, unzip for ZIP files, or 7z for 7-Zip files. If the extension is unsupported, it prints an unknown-format message, and if the file does not exist, the else block prints an invalid-file message.
+
+T2
+
+https://github.com/AfrinHossain/cs131/blob/b79f4e1d055ef4ff2cb3a4ff9c2c209ece98851e/ws4/.bashrc#L3
+
+alias ll='ls -lah --color=auto'
+
+This useful alias displays files in long, human-readable format, includes hidden files, and enables automatic color output.
+
+https://github.com/AfrinHossain/cs131/blob/b79f4e1d055ef4ff2cb3a4ff9c2c209ece98851e/ws4/.bashrc#L5
+
+mkcd()
+
+This shell function creates a directory and immediately enters it. It checks whether a directory name was supplied. If no argument is given, it displays a usage message and returns an error; otherwise, mkdir -p creates the directory and cd enters it.
+
+https://github.com/AfrinHossain/cs131/blob/b79f4e1d055ef4ff2cb3a4ff9c2c209ece98851e/ws4/.bashrc#L14
+
+if [ -d "$HOME/cs131" ]; then
+
+This if statement checks whether the cs131 repository directory exists. When the directory exists, it creates the CS131_HOME environment variable so the repository path can be referenced easily.
