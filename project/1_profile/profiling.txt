@@ -154,3 +154,44 @@ PHASE 1 KEY RESULTS
 - Average capacity: 15.070 TB
 - Dataset requirement: PASS (>5 GB and >50 million rows)
 - Note: The failed-record percentage is not an annualized drive failure rate.
+
+EXACT COMMANDS USED
+
+1. Preview first rows and selected columns:
+{ time head -n 3 ~/cs131_data/backblaze_2025/extracted/Q1/data_Q1_2025/2025-01-01.csv | cut -d',' -f1-5 | column -s',' -t; } 2>&1 | tee -a profiling.txt
+
+2. Preview last rows and selected columns:
+{ time tail -n 2 ~/cs131_data/backblaze_2025/extracted/Q1/data_Q1_2025/2025-01-01.csv | cut -d',' -f1-5 | column -s',' -t; } 2>&1 | tee -a profiling.txt
+
+3. Count all Q1 lines:
+{ time find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0 | xargs -0 cat | wc -l; } 2>&1 | tee -a profiling.txt
+
+4. Find the 10 most common Q1 drive models:
+{ time find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0 | xargs -0 -n 1 tail -n +2 | cut -d',' -f3 | sort | uniq -c | sort -nr | head -10; } 2>&1 | tee -a profiling.txt
+
+5. Count Q1 failed-drive rows:
+{ time find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0 | xargs -0 -n 1 tail -n +2 | cut -d',' -f5 | grep -c '^1$'; } 2>&1 | tee -a profiling.txt
+
+6. Calculate average Q1 drive capacity:
+{ time find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0 | xargs -0 -n 1 tail -n +2 | awk -F',' '$4 ~ /^[0-9]+$/ {sum += $4; n++} END {printf "Average capacity bytes: %.2f\nAverage capacity TB: %.3f\nRows used: %d\n", sum/n, (sum/n)/1000000000000, n}'; } 2>&1 | tee -a profiling.txt
+
+7. Count all 2025 CSV files:
+{ time find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" | wc -l; } 2>&1 | tee -a profiling.txt
+
+8. Count all 2025 lines:
+{ time find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0 | xargs -0 cat | wc -l; } 2>&1 | tee -a profiling.txt
+
+9. Find the 10 most common 2025 drive models:
+{ time find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0 | xargs -0 awk -F',' 'FNR > 1 {print $3}' | sort | uniq -c | sort -nr | head -10; } 2>&1 | tee -a profiling.txt
+
+10. Count full-year failed-drive rows:
+{ time find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0 | xargs -0 awk -F',' 'FNR > 1 {print $5}' | grep -c '^1$'; } 2>&1 | tee -a profiling.txt
+
+11. Calculate full-year average drive capacity:
+{ time find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -exec cat {} + | awk -F',' '$1 != "date" && $4 ~ /^[0-9]+$/ {sum += $4; n++} END {printf "Average capacity bytes: %.2f\nAverage capacity TB: %.3f\nRows used: %d\n", sum/n, (sum/n)/1000000000000, n}'; } 2>&1 | tee -a profiling.txt
+
+12. Calculate the failed-record percentage:
+{ time awk 'BEGIN {failed=4327; total=117394187; printf "Failed-record percentage: %.6f%%\n", (failed/total)*100}'; } 2>&1 | tee -a profiling.txt
+
+13. Count distinct drive models:
+{ time find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0 | xargs -0 awk -F',' 'FNR > 1 {print $3}' | sort -u | wc -l; } 2>&1 | tee -a profiling.txt
