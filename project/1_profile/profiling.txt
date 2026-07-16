@@ -1,0 +1,156 @@
+CS 131 Final Project — Phase 1 Profiling
+Dataset: Backblaze Drive Stats 2025 (Q1–Q4)
+Raw data directory: ~/cs131_data/backblaze_2025
+
+1. DATASET SIZE AND ROW COUNT
+
+
+Command: time head -n 1 ~/cs131_data/backblaze_2025/extracted/Q1/data_Q1_2025/2025-01-01.csv
+date,serial_number,model,capacity_bytes,failure,datacenter,cluster_id,vault_id,pod_id,pod_slot_num,is_legacy_format,smart_1_normalized,smart_1_raw,smart_2_normalized,smart_2_raw,smart_3_normalized,smart_3_raw,smart_4_normalized,smart_4_raw,smart_5_normalized,smart_5_raw,smart_7_normalized,smart_7_raw,smart_8_normalized,smart_8_raw,smart_9_normalized,smart_9_raw,smart_10_normalized,smart_10_raw,smart_11_normalized,smart_11_raw,smart_12_normalized,smart_12_raw,smart_13_normalized,smart_13_raw,smart_15_normalized,smart_15_raw,smart_16_normalized,smart_16_raw,smart_17_normalized,smart_17_raw,smart_18_normalized,smart_18_raw,smart_22_normalized,smart_22_raw,smart_23_normalized,smart_23_raw,smart_24_normalized,smart_24_raw,smart_27_normalized,smart_27_raw,smart_71_normalized,smart_71_raw,smart_82_normalized,smart_82_raw,smart_90_normalized,smart_90_raw,smart_160_normalized,smart_160_raw,smart_161_normalized,smart_161_raw,smart_163_normalized,smart_163_raw,smart_164_normalized,smart_164_raw,smart_165_normalized,smart_165_raw,smart_166_normalized,smart_166_raw,smart_167_normalized,smart_167_raw,smart_168_normalized,smart_168_raw,smart_169_normalized,smart_169_raw,smart_170_normalized,smart_170_raw,smart_171_normalized,smart_171_raw,smart_172_normalized,smart_172_raw,smart_173_normalized,smart_173_raw,smart_174_normalized,smart_174_raw,smart_175_normalized,smart_175_raw,smart_176_normalized,smart_176_raw,smart_177_normalized,smart_177_raw,smart_178_normalized,smart_178_raw,smart_179_normalized,smart_179_raw,smart_180_normalized,smart_180_raw,smart_181_normalized,smart_181_raw,smart_182_normalized,smart_182_raw,smart_183_normalized,smart_183_raw,smart_184_normalized,smart_184_raw,smart_187_normalized,smart_187_raw,smart_188_normalized,smart_188_raw,smart_189_normalized,smart_189_raw,smart_190_normalized,smart_190_raw,smart_191_normalized,smart_191_raw,smart_192_normalized,smart_192_raw,smart_193_normalized,smart_193_raw,smart_194_normalized,smart_194_raw,smart_195_normalized,smart_195_raw,smart_196_normalized,smart_196_raw,smart_197_normalized,smart_197_raw,smart_198_normalized,smart_198_raw,smart_199_normalized,smart_199_raw,smart_200_normalized,smart_200_raw,smart_201_normalized,smart_201_raw,smart_202_normalized,smart_202_raw,smart_206_normalized,smart_206_raw,smart_210_normalized,smart_210_raw,smart_211_normalized,smart_211_raw,smart_212_normalized,smart_212_raw,smart_218_normalized,smart_218_raw,smart_220_normalized,smart_220_raw,smart_222_normalized,smart_222_raw,smart_223_normalized,smart_223_raw,smart_224_normalized,smart_224_raw,smart_225_normalized,smart_225_raw,smart_226_normalized,smart_226_raw,smart_230_normalized,smart_230_raw,smart_231_normalized,smart_231_raw,smart_232_normalized,smart_232_raw,smart_233_normalized,smart_233_raw,smart_234_normalized,smart_234_raw,smart_235_normalized,smart_235_raw,smart_240_normalized,smart_240_raw,smart_241_normalized,smart_241_raw,smart_242_normalized,smart_242_raw,smart_244_normalized,smart_244_raw,smart_245_normalized,smart_245_raw,smart_246_normalized,smart_246_raw,smart_247_normalized,smart_247_raw,smart_248_normalized,smart_248_raw,smart_250_normalized,smart_250_raw,smart_251_normalized,smart_251_raw,smart_252_normalized,smart_252_raw,smart_254_normalized,smart_254_raw,smart_255_normalized,smart_255_raw
+head -n 1 ~/cs131_data/backblaze_2025/extracted/Q1/data_Q1_2025/2025-01-01.cs  0.00s user 0.00s system 46% cpu 0.005 total
+
+Command: time head -n 3 2025-01-01.csv | cut first five columns | column
+date        serial_number  model           capacity_bytes  failure
+2025-01-01  2207E60CC65A   CT250MX500SSD1  250059350016    0
+2025-01-01  2340E87B92B5   CT250MX500SSD1  250059350016    0
+head -n 3 ~/cs131_data/backblaze_2025/extracted/Q1/data_Q1_2025/2025-01-01.cs  0.00s user 0.00s system 44% cpu 0.006 total
+cut -d',' -f1-5  0.00s user 0.00s system 61% cpu 0.006 total
+column -s',' -t  0.00s user 0.00s system 61% cpu 0.006 total
+
+Command: time tail -n 2 2025-01-01.csv | cut first five columns | column
+2025-01-01  ZGG7J1TA  WDC WUH722222ALE6L4  22000969973760  0
+2025-01-01  ZGG7RGNA  WDC WUH722222ALE6L4  22000969973760  0
+tail -n 2 ~/cs131_data/backblaze_2025/extracted/Q1/data_Q1_2025/2025-01-01.cs  0.00s user 0.00s system 43% cpu 0.006 total
+cut -d',' -f1-5  0.00s user 0.00s system 45% cpu 0.006 total
+column -s',' -t  0.00s user 0.00s system 45% cpu 0.006 total
+
+Command: time concatenate all Q1 CSV files and count lines with wc -l
+ 27800076
+find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0  0.00s user 0.00s system 54% cpu 0.007 total
+xargs -0 cat  0.09s user 1.33s system 16% cpu 8.606 total
+wc -l  8.31s user 0.27s system 99% cpu 8.606 total
+Q1 CSV files: 90
+Q1 total lines including headers: 27,800,076
+Q1 data rows excluding headers: 27,799,986
+
+
+Command: time du -sh ~/cs131_data/backblaze_2025/extracted/Q1
+ 10G	/Users/afrinhossain/cs131_data/backblaze_2025/extracted/Q1
+du -sh ~/cs131_data/backblaze_2025/extracted/Q1  0.00s user 0.00s system 51% cpu 0.007 total
+
+Command: time count the 10 most common drive models in Q1
+3616128 TOSHIBA MG08ACA16TA
+3385931 TOSHIBA MG07ACA14TA
+3029485 ST16000NM001G
+2870372 WDC WUH722222ALE6L4
+2375575 WDC WUH721816ALE6L4
+1714395 ST12000NM0008
+1212798 ST8000NM0055
+1197864 HGST HUH721212ALE604
+1186197 ST12000NM001G
+951836 ST14000NM001G
+find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0  0.00s user 0.00s system 43% cpu 0.008 total
+xargs -0 -n 1 tail -n +2  273.19s user 3.79s system 99% cpu 4:37.26 total
+cut -d',' -f3  48.48s user 1.34s system 17% cpu 4:37.26 total
+sort  8.79s user 0.42s system 3% cpu 4:42.85 total
+uniq -c  1.91s user 0.08s system 0% cpu 4:42.85 total
+sort -nr  0.00s user 0.00s system 0% cpu 4:42.85 total
+head -10  0.00s user 0.00s system 0% cpu 4:42.85 total
+
+Command: time count Q1 failed-drive rows using cut and grep -c
+1067
+find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0  0.00s user 0.00s system 51% cpu 0.008 total
+xargs -0 -n 1 tail -n +2  268.78s user 3.93s system 99% cpu 4:33.06 total
+cut -d',' -f5  44.85s user 1.34s system 16% cpu 4:33.06 total
+grep -c '^1$'  0.81s user 0.02s system 0% cpu 4:33.06 total
+Q1 failed-drive rows: 1,067
+
+
+Command: time calculate average Q1 drive capacity with awk
+Average capacity bytes: 14617495867754.01
+Average capacity TB: 14.617
+Rows used: 27799986
+find ~/cs131_data/backblaze_2025/extracted/Q1 -type f -name "*.csv" -print0  0.00s user 0.00s system 50% cpu 0.007 total
+xargs -0 -n 1 tail -n +2  252.11s user 4.16s system 95% cpu 4:27.14 total
+awk -F','   241.71s user 1.56s system 91% cpu 4:27.14 total
+
+Command: time count all 2025 CSV files
+     365
+find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv"  0.00s user 0.00s system 50% cpu 0.010 total
+wc -l  0.00s user 0.00s system 25% cpu 0.009 total
+
+Command: time count all 2025 lines with wc -l
+ 117394552
+find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0  0.00s user 0.00s system 60% cpu 0.009 total
+xargs -0 cat  0.39s user 6.38s system 18% cpu 37.320 total
+wc -l  35.19s user 1.36s system 97% cpu 37.319 total
+2025 CSV files: 365
+2025 total lines including headers: 117,394,552
+2025 data rows excluding headers: 117,394,187
+
+
+Command: time du -sh ~/cs131_data/backblaze_2025/extracted
+ 43G	/Users/afrinhossain/cs131_data/backblaze_2025/extracted
+du -sh ~/cs131_data/backblaze_2025/extracted  0.00s user 0.00s system 52% cpu 0.009 total
+Full 2025 extracted size: 43 GB
+Full 2025 data rows: 117,394,187
+Requirement check: PASS (>5 GB and >50 million rows)
+
+
+Command: time count the 10 most common drive models in full 2025 data
+14623715 TOSHIBA MG08ACA16TA
+13654728 TOSHIBA MG07ACA14TA
+13612879 WDC WUH722222ALE6L4
+12381689 ST16000NM001G
+9615277 WDC WUH721816ALE6L4
+6877112 ST12000NM0008
+4909379 TOSHIBA MG10ACA20TE
+4870236 ST8000NM0055
+4853717 HGST HUH721212ALE604
+4817914 ST12000NM001G
+find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0  0.00s user 0.00s system 58% cpu 0.010 total
+xargs -0 awk -F',' 'FNR > 1 {print $3}'  927.05s user 13.16s system 99% cpu 15:41.56 total
+sort  34.93s user 2.35s system 3% cpu 16:03.93 total
+uniq -c  7.98s user 0.35s system 0% cpu 16:03.93 total
+sort -nr  0.00s user 0.00s system 0% cpu 16:03.93 total
+head -10  0.00s user 0.00s system 0% cpu 16:03.93 total
+
+Command: time count full 2025 failed-drive rows using awk and grep -c
+4327
+find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0  0.00s user 0.00s system 48% cpu 0.011 total
+xargs -0 awk -F',' 'FNR > 1 {print $5}'  887.07s user 12.83s system 99% cpu 15:01.18 total
+grep -c '^1$'  3.34s user 0.12s system 0% cpu 15:01.18 total
+Full 2025 failed-drive rows: 4,327
+
+
+Command: time calculate full 2025 average drive capacity with awk
+Average capacity bytes: 15069831132371.81
+Average capacity TB: 15.070
+Rows used: 117394187
+find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -exec cat {}  0.58s user 16.53s system 1% cpu 16:53.31 total
+awk -F','   900.08s user 7.01s system 89% cpu 16:53.31 total
+
+Command: time calculate percentage of 2025 rows marked as failed with awk
+Failed-record percentage: 0.003686%
+awk   0.00s user 0.00s system 41% cpu 0.009 total
+
+Command: time count distinct drive models in full 2025 data
+      80
+find ~/cs131_data/backblaze_2025/extracted -type f -name "*.csv" -print0  0.00s user 0.00s system 58% cpu 0.010 total
+xargs -0 awk -F',' 'FNR > 1 {print $3}'  943.14s user 13.13s system 99% cpu 15:57.55 total
+sort -u  22.21s user 2.21s system 2% cpu 16:06.75 total
+wc -l  0.00s user 0.00s system 0% cpu 16:06.75 total
+Distinct drive models in full 2025 data: 80
+
+
+PHASE 1 KEY RESULTS
+- Dataset: Backblaze Drive Stats 2025, Q1–Q4
+- Daily CSV files: 365
+- Extracted size: 43 GB
+- Data rows excluding headers: 117,394,187
+- Distinct drive models: 80
+- Records marked as failed: 4,327
+- Failed-record percentage: 0.003686%
+- Average capacity: 15.070 TB
+- Dataset requirement: PASS (>5 GB and >50 million rows)
+- Note: The failed-record percentage is not an annualized drive failure rate.
