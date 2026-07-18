@@ -1,0 +1,154 @@
+#1.Try to open the raw file (or one year of it) in Excel
+
+Row count: 117,341,987. The combined 2025 Backblaze CSV is about 43 GB and contains over 100 million rows, far beyond Excel's 1,048,576-row worksheet limit. When I tried to open it in Excel, Excel stayed blank/unresponsive and did not load the data.
+
+#screenshot: excel_not_open.png
+
+
+#2.Try pandas.read_csv() on the full file
+
+#pandas_read_test.py
+$ cat > 2_breaking/pandas_read_test.py << 'EOF'
+import time
+import pandas as pd
+
+path = "2_breaking/backblaze_2025_combined.csv"
+
+print(f"Reading file with pandas.read_csv(): {path}")
+
+start = time.time()
+
+df = pd.read_csv(path)
+
+elapsed = time.time() - start
+
+print("Finished reading CSV")
+print("Rows:", len(df))
+print("Columns:", len(df.columns))
+print("Elapsed seconds:", elapsed)
+print("Estimated pandas memory usage GB:", df.memory_usage(deep=True).sum() / 1e9)
+EOF
+
+$ time python 2_breaking/pandas_read_test.py
+
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 32.0 KiB for an array with shape (4096,) and data type int64
+
+real    6m54.340s
+user    0m0.015s
+sys     0m0.031s
+
+#Memory usage reached 97% during the pandas read attempt, and pandas failed with a NumPy ArrayMemoryError.
+#Screenshot:  pandas_memory_blowup.png
+
+
+#3. Top 20 drive models by row count
+#a.Command line run the whole data
+
+$ { time awk -F',' 'FNR > 1 {print $3}' 2_breaking/backblaze_2025_combined.csv | sort | uniq -c | sort -nr | head -20; } 2>&1 | tee -a 2_breaking/breaking.txt
+14623715 TOSHIBA MG08ACA16TA
+13654728 TOSHIBA MG07ACA14TA
+13612879 WDC WUH722222ALE6L4
+12381689 ST16000NM001G
+9615277 WDC WUH721816ALE6L4
+6877112 ST12000NM0008
+4909379 TOSHIBA MG10ACA20TE
+4870236 ST8000NM0055
+4853717 HGST HUH721212ALE604
+4817914 ST12000NM001G
+3849616 ST14000NM001G
+3628418 HGST HUH721212ALN604
+3276650 ST8000DM002
+3141290 WDC WUH721414ALE6L4
+2188375 TOSHIBA MG08ACA16TE
+1941010 ST24000NM002H
+1843841 TOSHIBA MG08ACA16TEY
+1092886 WDC WUH721816ALE6L0
+ 951081 HGST HUH721212ALE600
+ 467111 ST14000NM0138
+
+real    3m1.353s
+user    2m10.247s
+sys     0m14.013s
+
+#3.b.PySpark
+
+#spark_top_models.py
+
+cat > 2_breaking/spark_top_models.py << 'EOF'
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+import time
+
+spark = SparkSession.builder.appName("BackblazeTopModels").getOrCreate()
+
+input_path = "gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv"
+
+start = time.time()
+
+df = spark.read.option("header", True).csv(input_path)
+
+result = (
+    df.groupBy("model")
+      .count()
+      .orderBy(col("count").desc())
+)
+
+result.show(20, truncate=False)
+
+elapsed = time.time() - start
+print(f"Elapsed seconds: {elapsed}")
+
+spark.stop()
+EOF
+
+#upload data
+
+$ gsutil -m cp data_Q1_2025/*/*.csv gs://double-zenith-499516-i7-cs131/backblaze_2025/
+$ gsutil -m cp data_Q2_2025/*/*.csv gs://double-zenith-499516-i7-cs131/backblaze_2025/
+$ gsutil -m cp data_Q3_2025/*/*.csv gs://double-zenith-499516-i7-cs131/backblaze_2025/
+$ gsutil -m cp data_Q4_2025/*/*.csv gs://double-zenith-499516-i7-cs131/backblaze_2025/
+
+#upload python
+
+$ gsutil cp 2_breaking/spark_top_models.py gs://double-zenith-499516-i7-cs131/scripts/spark_top_models.py
+
+#run job
+
+$ gcloud dataproc jobs submit pyspark gs://double-zenith-499516-i7-cs131/scripts/spark_top_models.py \
+  --cluster=cs131-cluster \
+  --region=us-central1
+
+
+#pyspark running result:
++--------------------+--------+
+|model               |count   |
++--------------------+--------+
+|TOSHIBA MG08ACA16TA |14623715|
+|TOSHIBA MG07ACA14TA |13654728|
+|WDC WUH722222ALE6L4 |13612879|
+|ST16000NM001G       |12381689|
+|WDC WUH721816ALE6L4 |9615277 |
+|ST12000NM0008       |6877112 |
+|TOSHIBA MG10ACA20TE |4909379 |
+|ST8000NM0055        |4870236 |
+|HGST HUH721212ALE604|4853717 |
+|ST12000NM001G       |4817914 |
+|ST14000NM001G       |3849616 |
+|HGST HUH721212ALN604|3628418 |
+|ST8000DM002         |3276650 |
+|WDC WUH721414ALE6L4 |3141290 |
+|TOSHIBA MG08ACA16TE |2188375 |
+|ST24000NM002H       |1941010 |
+|TOSHIBA MG08ACA16TEY|1843841 |
+|WDC WUH721816ALE6L0 |1092886 |
+|HGST HUH721212ALE600|951081  |
+|ST14000NM0138       |467111  |
++--------------------+--------+
+only showing top 20 rows
+
+Elapsed seconds: 416.58788561820984
+
+#screenshot: pyspark_result.png
+
+#After the PySpark job completed, I deleted the Dataproc cluster to avoid ongoing charges:
+$ gcloud dataproc clusters delete cs131-cluster --region=us-central1
