@@ -1,0 +1,14 @@
+# Large raw data files
+*.csv
+*.zip
+*.parquet
+
+# Backblaze raw data folders
+project/data_Q1_2025/
+project/data_Q2_2025/
+project/data_Q3_2025/
+project/data_Q4_2025/
+
+# Combined large CSV files
+project/2_breaking/backblaze_2025_combined*
+project/2_breaking/backblaze_Q1_2025_combined*
