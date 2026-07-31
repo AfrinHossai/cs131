@@ -1,0 +1,157 @@
+PHASE 3 - PYSPARK SCALING EXPERIMENT
+
+Project: Backblaze 2025 Drive Failure Analysis
+
+1. Goal
+
+The goal of this phase was to process the full Backblaze 2025 dataset with PySpark on Google Cloud Dataproc and measure how runtime changed when the number of workers increased from 1 to 2 to 4.
+
+The analysis calculated the annualized failure rate for each drive model:
+
+Annualized failure rate (%) = failures / drive-days * 365 * 100
+
+Only models with at least 100,000 drive-days were kept so that models with very small sample sizes would not dominate the ranking.
+
+2. Dataset and Storage
+
+Dataset: Backblaze Drive Stats 2025
+Input path: gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv
+Cleaned rows processed in every run: 117,394,187
+
+The raw CSV files remained in Google Cloud Storage and were read directly by Spark. The files were not copied into the local home directory.
+
+3. PySpark Job
+
+Script:
+gs://double-zenith-499516-i7-cs131/scripts/analysis.py
+
+The script used an explicit schema, filtered invalid rows, selected the model and failure columns, cached the cleaned DataFrame, grouped the data by drive model, counted drive-days, summed failures, calculated annualized failure rate, sorted the models by failure rate, displayed the top 20 models, and wrote the output back to GCS.
+
+The same script, input dataset, machine type, and analysis logic were used for all three runs. Only the worker configuration and output path changed.
+
+4. Cluster Configuration
+
+Region: us-central1
+Machine type: e2-standard-4
+Boot disk size: 100 GB per node
+
+The cluster creation commands were:
+
+1-worker configuration:
+
+gcloud dataproc clusters create cs131-backblaze-w1 \
+  --region=us-central1 \
+  --single-node \
+  --master-machine-type=e2-standard-4 \
+  --master-boot-disk-size=100GB
+
+2-worker configuration:
+
+gcloud dataproc clusters create cs131-backblaze-w2 \
+  --region=us-central1 \
+  --zone=us-central1-f \
+  --num-workers=2 \
+  --master-machine-type=e2-standard-4 \
+  --worker-machine-type=e2-standard-4 \
+  --master-boot-disk-size=100GB \
+  --worker-boot-disk-size=100GB
+
+4-worker configuration:
+
+gcloud dataproc clusters create cs131-backblaze-w4 \
+  --region=us-central1 \
+  --zone=us-central1-f \
+  --num-workers=4 \
+  --master-machine-type=e2-standard-4 \
+  --worker-machine-type=e2-standard-4 \
+  --master-boot-disk-size=100GB \
+  --worker-boot-disk-size=100GB
+
+Important reproducibility note: the Spark job logs confirm the cluster names, input paths, output paths, processed row counts, runtimes, and successful completion. They do not include the boot-disk-size fields. The 100 GB configuration should therefore be supported by the saved cluster creation commands or separate cluster-description output.
+
+5. Job Submission Commands
+
+1 worker:
+
+gcloud dataproc jobs submit pyspark \
+  gs://double-zenith-499516-i7-cs131/scripts/analysis.py \
+  --cluster=cs131-backblaze-w1 \
+  --region=us-central1 \
+  -- \
+  "gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv" \
+  "gs://double-zenith-499516-i7-cs131/phase3_results/workers_1" \
+  2>&1 | tee workers_1.log
+
+2 workers:
+
+gcloud dataproc jobs submit pyspark \
+  gs://double-zenith-499516-i7-cs131/scripts/analysis.py \
+  --cluster=cs131-backblaze-w2 \
+  --region=us-central1 \
+  -- \
+  "gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv" \
+  "gs://double-zenith-499516-i7-cs131/phase3_results/workers_2" \
+  2>&1 | tee workers_2.log
+
+4 workers:
+
+gcloud dataproc jobs submit pyspark \
+  gs://double-zenith-499516-i7-cs131/scripts/analysis.py \
+  --cluster=cs131-backblaze-w4 \
+  --region=us-central1 \
+  -- \
+  "gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv" \
+  "gs://double-zenith-499516-i7-cs131/phase3_results/workers_4" \
+  2>&1 | tee workers_4.log
+
+After each job finished, the cluster was deleted before creating the next configuration:
+
+gcloud dataproc clusters delete cs131-backblaze-w1   --region=us-central1   --quiet
+gcloud dataproc clusters delete cs131-backblaze-w2   --region=us-central1   --quiet
+gcloud dataproc clusters delete cs131-backblaze-w4   --region=us-central1   --quiet
+
+6. Scaling Results
+
+Workers | Runtime (seconds) | Speedup | Parallel Efficiency | Cleaned Rows | Status
+1       | 334.160           | 1.00x   | 100.0%              | 117,394,187  | DONE
+2       | 262.995           | 1.27x   | 63.5%               | 117,394,187  | DONE
+4       | 145.209           | 2.30x   | 57.5%               | 117,394,187  | DONE
+
+Speedup was calculated relative to the 1-worker run:
+
+Speedup(n) = runtime with 1 worker / runtime with n workers
+
+Parallel efficiency was calculated as:
+
+Efficiency(n) = speedup(n) / n * 100%
+
+The 2-worker run reduced runtime by approximately 21.3% compared with the 1-worker run. The 4-worker run reduced runtime by approximately 56.5% compared with the 1-worker run.
+
+7. Analysis Results
+
+All three runs produced the same cleaned row count and the same top-20 ranking, showing that the computation was consistent across cluster sizes.
+
+The highest annualized failure-rate model in the output was TOSHIBA MG08ACA16TEY, with 1,843,841 drive-days, 318 failures, and an annualized failure rate of 6.295%. Other high-rate models included ST10000NM0086 at 5.6618%, ST12000NM0007 at 5.4751%, and ST14000NM0138 at 5.3135%.
+
+8. Interpretation
+
+Increasing the worker count reduced the total Spark runtime. Runtime decreased from 334.160 seconds with 1 worker to 145.209 seconds with 4 workers. However, the speedup was not linear. Four workers produced a 2.30x speedup instead of an ideal 4.00x speedup.
+
+This sublinear scaling is expected because the job includes fixed and distributed overhead such as Spark startup, task scheduling, reading CSV files from GCS, shuffling data during groupBy, sorting results, coordination between nodes, and writing output to GCS.
+
+The 1-worker experiment used Dataproc single-node mode because a standard Dataproc cluster does not support exactly one primary worker. The 2-worker and 4-worker experiments used standard multi-node clusters. Therefore, the results show practical Dataproc scaling rather than a perfectly identical cluster architecture.
+
+9. Output Locations
+
+1 worker:
+gs://double-zenith-499516-i7-cs131/phase3_results/workers_1
+
+2 workers:
+gs://double-zenith-499516-i7-cs131/phase3_results/workers_2
+
+4 workers:
+gs://double-zenith-499516-i7-cs131/phase3_results/workers_4
+
+10. Conclusion
+
+The experiment successfully processed more than 117 million cleaned records with PySpark and completed the required 1-worker, 2-worker, and 4-worker scaling runs. The 4-worker configuration was the fastest, reducing runtime by 56.5% relative to the 1-worker configuration. The results demonstrate that distributed processing improves performance on the Backblaze dataset, while also showing that Spark scaling is limited by communication, I/O, scheduling, and shuffle overhead.

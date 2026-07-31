@@ -1,0 +1,98 @@
+Job [3452b60db389486d88f8e8c5bcede64e] submitted.
+Waiting for job output...
+26/07/30 19:06:04 INFO SparkEnv: Registering MapOutputTracker
+26/07/30 19:06:05 INFO SparkEnv: Registering BlockManagerMaster
+26/07/30 19:06:05 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/07/30 19:06:05 INFO SparkEnv: Registering OutputCommitCoordinator
+26/07/30 19:06:06 INFO MetricsConfig: Loaded properties from hadoop-metrics2.properties
+26/07/30 19:06:06 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/07/30 19:06:06 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+26/07/30 19:06:06 INFO DataprocSparkPlugin: Registered 188 driver metrics
+26/07/30 19:06:07 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at cs131-backblaze-w1-m.us-central1-a.c.double-zenith-499516-i7.internal./10.128.0.25:8032
+26/07/30 19:06:08 INFO AHSProxy: Connecting to Application History server at cs131-backblaze-w1-m.us-central1-a.c.double-zenith-499516-i7.internal./10.128.0.25:10200
+26/07/30 19:06:09 INFO Configuration: resource-types.xml not found
+26/07/30 19:06:09 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+26/07/30 19:06:11 INFO YarnClientImpl: Submitted application application_1785438267430_0001
+26/07/30 19:06:12 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at cs131-backblaze-w1-m.us-central1-a.c.double-zenith-499516-i7.internal./10.128.0.25:8030
+26/07/30 19:06:14 INFO RequestTracker: Detected high latency for [url=https://storage.googleapis.com/storage/v1/b/dataproc-temp-us-central1-40669501508-puhmtkaj/o/d5b5b18f-be98-41c5-8d40-5f3c067536e9%2Fspark-job-history?fields=bucket,name,timeCreated,updated,generation,metageneration,size,contentType,contentEncoding,md5Hash,crc32c,metadata; invocationId=gl-java/11.0.30 gdcl/2.1.1 linux/6.1.0 gccl-invocation-id/db89ede4]. durationMs=385; method=GET; thread=Thread-4 [CONTEXT ratelimit_period="10 SECONDS" ]
+26/07/30 19:06:15 INFO GoogleCloudStorageImpl: Ignoring exception of type GoogleJsonResponseException; verified object already exists with desired state.
+26/07/30 19:06:16 INFO GoogleHadoopOutputStream: hflush(): No-op due to rate limit (RateLimiter[stableRate=0.2qps]): readers will *not* yet see flushed data for gs://dataproc-temp-us-central1-40669501508-puhmtkaj/d5b5b18f-be98-41c5-8d40-5f3c067536e9/spark-job-history/application_1785438267430_0001.inprogress [CONTEXT ratelimit_period="1 MINUTES" ]
+26/07/30 19:06:43 INFO GhfsGlobalStorageStatistics: periodic connector metrics: {action_http_delete_request=3, action_http_delete_request_duration=189, action_http_delete_request_max=76, action_http_delete_request_mean=63, action_http_delete_request_min=53, action_http_post_request=8, action_http_post_request_duration=1026, action_http_post_request_max=240, action_http_post_request_mean=128, action_http_post_request_min=47, action_http_put_request=4, action_http_put_request_duration=632, action_http_put_request_max=187, action_http_put_request_mean=158, action_http_put_request_min=97, directories_created=1, files_created=1, gcs_api_client_non_found_response_count=20, gcs_api_client_precondition_failed_response_count=1, gcs_api_client_side_error_count=21, gcs_api_time=4289, gcs_api_total_request_count=46, gcs_connector_time=4348, gcs_get_other_request=3, gcs_list_dir_request=2, gcs_list_dir_request_duration=194, gcs_list_dir_request_max=111, gcs_list_dir_request_mean=97, gcs_list_dir_request_min=83, gcs_list_file_request=3, gcs_list_file_request_duration=558, gcs_list_file_request_max=392, gcs_list_file_request_mean=186, gcs_list_file_request_min=53, gcs_metadata_request=22, gcs_metadata_request_duration=1579, gcs_metadata_request_max=385, gcs_metadata_request_mean=71, gcs_metadata_request_min=32, gs_filesystem_create=4, gs_filesystem_initialize=3, op_create=1, op_create_duration=183, op_create_max=183, op_create_mean=183, op_create_min=183, op_get_file_status=2, op_get_file_status_duration=1502, op_get_file_status_max=1367, op_get_file_status_mean=751, op_get_file_status_min=135, op_get_list_status_result_size=365, op_glob_status=1, op_hflush=11, op_hflush_duration=2028, op_hflush_max=695, op_hflush_mean=184, op_list_status=1, op_list_status_duration=309, op_list_status_max=309, op_list_status_mean=309, op_list_status_min=309, op_mkdirs=1, op_mkdirs_duration=326, op_mkdirs_max=326, op_mkdirs_mean=326, op_mkdirs_min=326, stream_write_bytes=1242416, uptimeSeconds=37}
+[CONTEXT ratelimit_period="5 MINUTES" ]
+26/07/30 19:11:15 INFO GoogleHadoopOutputStream: hflush(): No-op due to rate limit (RateLimiter[stableRate=0.2qps]): readers will *not* yet see flushed data for gs://dataproc-temp-us-central1-40669501508-puhmtkaj/d5b5b18f-be98-41c5-8d40-5f3c067536e9/spark-job-history/application_1785438267430_0001.inprogress [CONTEXT ratelimit_period="1 MINUTES [skipped: 10]" ]
+26/07/30 19:11:33 INFO GhfsGlobalStorageStatistics: Detected potential high latency for operation action_http_post_request. latencyMs=548; previousMaxLatencyMs=240; operationCount=16; context=[url=https://storage.googleapis.com/storage/v1/b/dataproc-temp-us-central1-40669501508-puhmtkaj/o/d5b5b18f-be98-41c5-8d40-5f3c067536e9%2Fspark-job-history%2Fapplication_1785438267430_0001.inprogress/compose?ifGenerationMatch=1785438678891084; invocationId=gl-java/11.0.30 gdcl/2.1.1 linux/6.1.0 gccl-invocation-id/9557be2b]; thread=spark-listener-group-eventLog
+26/07/30 19:11:33 INFO RequestTracker: Detected high latency for [url=https://storage.googleapis.com/storage/v1/b/dataproc-temp-us-central1-40669501508-puhmtkaj/o/d5b5b18f-be98-41c5-8d40-5f3c067536e9%2Fspark-job-history%2Fapplication_1785438267430_0001.inprogress/compose?ifGenerationMatch=1785438678891084; invocationId=gl-java/11.0.30 gdcl/2.1.1 linux/6.1.0 gccl-invocation-id/9557be2b]. durationMs=550; method=POST; thread=spark-listener-group-eventLog [CONTEXT ratelimit_period="10 SECONDS [skipped: 1]" ]
+26/07/30 19:11:34 INFO GhfsGlobalStorageStatistics: Detected potential high latency for operation op_hflush. latencyMs=841; previousMaxLatencyMs=695; operationCount=35; context=gs://dataproc-temp-us-central1-40669501508-puhmtkaj/d5b5b18f-be98-41c5-8d40-5f3c067536e9/spark-job-history/application_1785438267430_0001.inprogress; thread=spark-listener-group-eventLog
++--------------------+----------+--------+---------------------------+
+|model               |drive_days|failures|annualized_failure_rate_pct|
++--------------------+----------+--------+---------------------------+
+|TOSHIBA MG08ACA16TEY|1843841   |318     |6.295                      |
+|ST10000NM0086       |367460    |57      |5.6618                     |
+|ST12000NM0007       |366658    |55      |5.4751                     |
+|ST14000NM0138       |467111    |68      |5.3135                     |
+|HGST HUH721212ALN604|3628418   |393     |3.9534                     |
+|HGST HUH728080ALE600|389340    |38      |3.5624                     |
+|ST24000NM002H       |1941010   |146     |2.7455                     |
+|HGST HUH721212ALE604|4853717   |358     |2.6922                     |
+|ST12000NM0008       |6877112   |486     |2.5794                     |
+|TOSHIBA MG07ACA14TEY|324488    |20      |2.2497                     |
+|ST14000NM000J       |117113    |7       |2.1817                     |
+|ST8000NM0055        |4870236   |291     |2.1809                     |
+|WDC WUH721816ALE6L0 |1092886   |59      |1.9705                     |
+|ST8000DM002         |3276650   |156     |1.7378                     |
+|ST14000NM001G       |3849616   |142     |1.3464                     |
+|TOSHIBA MG08ACA16TE |2188375   |79      |1.3176                     |
+|TOSHIBA MG07ACA14TA |13654728  |432     |1.1548                     |
+|ST12000NM001G       |4817914   |127     |0.9621                     |
+|TOSHIBA MG08ACA16TA |14623715  |362     |0.9035                     |
+|WDC WUH721414ALE6L4 |3141290   |70      |0.8134                     |
++--------------------+----------+--------+---------------------------+
+only showing top 20 rows
+
+26/07/30 19:11:46 INFO GhfsGlobalStorageStatistics: periodic connector metrics: {action_http_delete_request=7, action_http_delete_request_duration=427, action_http_delete_request_max=76, action_http_delete_request_mean=61, action_http_delete_request_min=48, action_http_post_request=18, action_http_post_request_duration=2415, action_http_post_request_max=548, action_http_post_request_mean=134, action_http_post_request_min=45, action_http_put_request=9, action_http_put_request_duration=1331, action_http_put_request_max=187, action_http_put_request_mean=147, action_http_put_request_min=97, directories_created=1, files_created=1, gcs_api_client_non_found_response_count=35, gcs_api_client_precondition_failed_response_count=1, gcs_api_client_side_error_count=36, gcs_api_time=7489, gcs_api_total_request_count=85, gcs_connector_time=6836, gcs_get_other_request=8, gcs_list_dir_request=2, gcs_list_dir_request_duration=194, gcs_list_dir_request_max=111, gcs_list_dir_request_mean=97, gcs_list_dir_request_min=83, gcs_list_file_request=3, gcs_list_file_request_duration=558, gcs_list_file_request_max=392, gcs_list_file_request_mean=186, gcs_list_file_request_min=53, gcs_metadata_request=37, gcs_metadata_request_duration=2249, gcs_metadata_request_max=385, gcs_metadata_request_mean=60, gcs_metadata_request_min=22, gs_filesystem_create=4, gs_filesystem_initialize=3, op_create=1, op_create_duration=183, op_create_max=183, op_create_mean=183, op_create_min=183, op_get_file_status=2, op_get_file_status_duration=1502, op_get_file_status_max=1367, op_get_file_status_mean=751, op_get_file_status_min=135, op_get_list_status_result_size=365, op_glob_status=1, op_hflush=49, op_hflush_duration=4516, op_hflush_max=841, op_hflush_mean=92, op_list_status=1, op_list_status_duration=309, op_list_status_max=309, op_list_status_mean=309, op_list_status_min=309, op_mkdirs=1, op_mkdirs_duration=326, op_mkdirs_max=326, op_mkdirs_mean=326, op_mkdirs_min=326, stream_write_bytes=9106185, uptimeSeconds=340}
+[CONTEXT ratelimit_period="5 MINUTES [skipped: 37]" ]
+26/07/30 19:11:48 INFO GhfsGlobalStorageStatistics: Detected potential high latency for operation gcs_list_file_request. latencyMs=634; previousMaxLatencyMs=392; operationCount=4; context=[url=https://storage.googleapis.com/storage/v1/b/double-zenith-499516-i7-cs131/o?delimiter=/&fields=items(bucket,name,timeCreated,updated,generation,metageneration,size,contentType,contentEncoding,md5Hash,crc32c,metadata),prefixes,nextPageToken&includeFoldersAsPrefixes=false&includeTrailingDelimiter=true&maxResults=1&prefix=phase3_results/workers_1/; invocationId=gl-java/11.0.30 gdcl/2.1.1 linux/6.1.0 gccl-invocation-id/b3b02f52]; thread=gcsfs-misc-2
+26/07/30 19:11:48 INFO RequestTracker: Detected high latency for [url=https://storage.googleapis.com/storage/v1/b/double-zenith-499516-i7-cs131/o?delimiter=/&fields=items(bucket,name,timeCreated,updated,generation,metageneration,size,contentType,contentEncoding,md5Hash,crc32c,metadata),prefixes,nextPageToken&includeFoldersAsPrefixes=false&includeTrailingDelimiter=true&maxResults=1&prefix=phase3_results/workers_1/; invocationId=gl-java/11.0.30 gdcl/2.1.1 linux/6.1.0 gccl-invocation-id/b3b02f52]. durationMs=635; method=GET; thread=gcsfs-misc-2 [CONTEXT ratelimit_period="10 SECONDS" ]
+26/07/30 19:11:48 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/07/30 19:11:50 INFO GoogleCloudStorageImpl: Checking if gs://double-zenith-499516-i7-cs131/phase3_results/workers_1/_temporary is HN enabled returned false
+26/07/30 19:11:51 INFO GhfsGlobalStorageStatistics: Detected potential high latency for operation action_http_delete_request. latencyMs=959; previousMaxLatencyMs=76; operationCount=10; context=[url=https://storage.googleapis.com/storage/v1/b/double-zenith-499516-i7-cs131/o/phase3_results%2Fworkers_1%2F_temporary%2F0%2F_temporary%2F?ifGenerationMatch=1785438710217772; invocationId=gl-java/11.0.30 gdcl/2.1.1 linux/6.1.0 gccl-invocation-id/7729b0e2]; thread=gcsfs-batch-helper-26
+26/07/30 19:11:51 INFO GoogleCloudStorageFileSystemImpl: Successfully repaired 'gs://double-zenith-499516-i7-cs131/phase3_results/workers_1/' directory.
+26/07/30 19:11:51 INFO GhfsGlobalStorageStatistics: Detected potential high latency for operation op_delete. latencyMs=1177; previousMaxLatencyMs=0; operationCount=1; context=gs://double-zenith-499516-i7-cs131/phase3_results/workers_1/_temporary; thread=Thread-4
+CLEANED_ROWS: 117394187
+ELAPSED_SECONDS: 334.15956020355225
+OUTPUT_PATH: gs://double-zenith-499516-i7-cs131/phase3_results/workers_1
+26/07/30 19:11:52 INFO DataprocSparkPlugin: Shutting down driver plugin. metrics=[action_http_patch_request=0, files_created=2, gcs_api_server_timeout_count=0, op_get_list_status_result_size=365, op_open=0, action_http_delete_request=11, gcs_api_time=10828, gcs_backoff_count=0, gcs_api_client_unauthorized_response_count=0, stream_read_close_operations=0, stream_read_bytes_backwards_on_seek=0, gs_filesystem_create=4, exception_count=2, gcs_exception_count=0, gcs_api_total_request_count=117, op_create=2, stream_read_vectored_operations=0, gcs_metadata_request=51, gcs_api_client_bad_request_count=0, action_http_put_request=11, op_create_non_recursive=0, gcs_api_client_gone_response_count=0, gs_filesystem_initialize=3, stream_read_vectored_incoming_ranges=0, stream_write_operations=0, gcs_list_dir_request=3, stream_read_operations=0, gcs_api_client_request_timeout_count=0, op_rename=0, op_get_file_status=3, op_glob_status=1, op_exists=1, stream_write_bytes=9278002, op_xattr_list=0, op_get_delegation_token=0, gcs_api_server_unavailable_count=0, directories_created=2, files_delete_rejected=0, stream_read_vectored_combined_ranges=0, op_xattr_get_named=0, gcs_list_file_request=7, op_hsync=0, action_http_get_request=0, stream_read_operations_incomplete=0, op_delete=2, stream_read_bytes=0, gcs_api_client_non_found_response_count=49, op_list_located_status=0, gcs_api_client_requested_range_not_statisfiable_count=0, op_hflush=68, op_list_status=1, stream_read_vectored_read_bytes_discarded=0, op_xattr_get_named_map=0, gcs_api_client_side_error_count=50, op_get_file_checksum=0, gcs_api_server_internal_error_count=0, stream_read_seek_bytes_skipped=0, stream_write_close_operations=1, gcs_get_media_request=0, gcs_connector_time=9620, files_deleted=2, action_http_post_request=24, op_mkdirs=2, gcs_api_client_rate_limit_error_count=0, op_copy_from_local_file=0, gcs_api_server_bad_gateway_count=0, stream_readVectored_range_duration=0, stream_read_seek_backward_operations=0, gcs_api_server_side_error_count=0, stream_read_seek_operations=0, gcs_get_other_request=10, stream_read_seek_forward_operations=0, gcs_api_client_precondition_failed_response_count=1, op_xattr_get_map=0, delegation_tokens_issued=0, gcs_backoff_time=0, gcs_list_dir_request_min=33, gcs_metadata_request_min=22, op_delete_min=32, op_glob_status_min=0, op_create_non_recursive_min=0, op_hsync_min=0, op_xattr_get_named_min=0, op_xattr_get_named_map_min=0, op_hflush_min=0, op_xattr_list_min=0, action_http_put_request_min=97, op_open_min=0, gcs_list_file_request_min=22, stream_write_close_operations_min=173, op_create_min=106, action_http_delete_request_min=48, op_mkdirs_min=244, op_list_status_min=309, gcs_get_media_request_min=0, stream_readVectored_range_duration_min=0, stream_read_vectored_operations_min=0, stream_read_close_operations_min=0, stream_read_operations_min=0, stream_read_seek_operations_min=0, op_xattr_get_map_min=0, stream_write_operations_min=0, action_http_patch_request_min=0, op_get_file_status_min=135, op_rename_min=0, delegation_tokens_issued_min=0, action_http_post_request_min=38, stream_read_close_operations_max=0, stream_read_seek_operations_max=0, op_hflush_max=841, op_xattr_list_max=0, op_xattr_get_map_max=0, action_http_put_request_max=187, action_http_patch_request_max=0, action_http_post_request_max=548, stream_write_close_operations_max=173, action_http_delete_request_max=959, op_mkdirs_max=326, gcs_get_media_request_max=0, op_rename_max=0, stream_read_vectored_operations_max=0, stream_readVectored_range_duration_max=0, op_xattr_get_named_map_max=0, stream_write_operations_max=0, stream_read_operations_max=0, op_xattr_get_named_max=0, op_glob_status_max=0, op_create_non_recursive_max=0, op_get_file_status_max=1367, op_open_max=0, delegation_tokens_issued_max=0, gcs_list_file_request_max=634, gcs_metadata_request_max=385, op_create_max=183, op_delete_max=1177, op_list_status_max=309, op_hsync_max=0, gcs_list_dir_request_max=111, op_open_mean=0, op_xattr_list_mean=0, op_rename_mean=0, op_xattr_get_map_mean=0, gcs_list_dir_request_mean=75, op_glob_status_mean=0, stream_read_seek_operations_mean=0, gcs_list_file_request_mean=182, stream_write_operations_mean=0, op_hflush_mean=72, gcs_metadata_request_mean=57, op_list_status_mean=309, stream_read_close_operations_mean=0, op_xattr_get_named_map_mean=0, stream_read_vectored_operations_mean=0, op_mkdirs_mean=285, action_http_post_request_mean=121, stream_write_close_operations_mean=173, action_http_put_request_mean=139, action_http_patch_request_mean=0, op_hsync_mean=0, delegation_tokens_issued_mean=0, action_http_delete_request_mean=141, stream_read_operations_mean=0, op_create_mean=144, op_delete_mean=604, op_create_non_recursive_mean=0, stream_readVectored_range_duration_mean=0, op_xattr_get_named_mean=0, gcs_get_media_request_mean=0, op_get_file_status_mean=713, op_delete_duration=1209, op_get_file_status_duration=2140, action_http_put_request_duration=1537, stream_write_operations_duration=0, op_hsync_duration=0, gcs_metadata_request_duration=2923, gcs_get_media_request_duration=0, gcs_list_file_request_duration=1277, op_list_status_duration=309, op_mkdirs_duration=570, op_open_duration=0, op_create_duration=289, op_hflush_duration=4930, gcs_list_dir_request_duration=227, op_glob_status_duration=0, stream_read_operations_duration=0, action_http_delete_request_duration=1555, action_http_post_request_duration=2914, op_rename_duration=0]
+Job [3452b60db389486d88f8e8c5bcede64e] finished successfully.
+done: true
+driverControlFilesUri: gs://dataproc-staging-us-central1-40669501508-e5enm2fi/google-cloud-dataproc-metainfo/d5b5b18f-be98-41c5-8d40-5f3c067536e9/jobs/3452b60db389486d88f8e8c5bcede64e/
+driverOutputResourceUri: gs://dataproc-staging-us-central1-40669501508-e5enm2fi/google-cloud-dataproc-metainfo/d5b5b18f-be98-41c5-8d40-5f3c067536e9/jobs/3452b60db389486d88f8e8c5bcede64e/driveroutput
+jobUuid: 91b17f53-971c-366a-a2e3-66e09d2be317
+placement:
+  clusterName: cs131-backblaze-w1
+  clusterUuid: d5b5b18f-be98-41c5-8d40-5f3c067536e9
+pysparkJob:
+  args:
+  - gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv
+  - gs://double-zenith-499516-i7-cs131/phase3_results/workers_1
+  mainPythonFileUri: gs://double-zenith-499516-i7-cs131/scripts/analysis.py
+reference:
+  jobId: 3452b60db389486d88f8e8c5bcede64e
+  projectId: double-zenith-499516-i7
+status:
+  state: DONE
+  stateStartTime: '2026-07-30T19:11:54.452721Z'
+statusHistory:
+- state: PENDING
+  stateStartTime: '2026-07-30T19:05:55.352901Z'
+- state: SETUP_DONE
+  stateStartTime: '2026-07-30T19:05:55.450624Z'
+- details: Agent reported job success
+  state: RUNNING
+  stateStartTime: '2026-07-30T19:05:55.900312Z'
+yarnApplications:
+- memoryMbSeconds: '4584433'
+  name: BackblazeFailureAnalysis
+  progress: 1.0
+  state: FINISHED
+  trackingUrl: http://cs131-backblaze-w1-m.us-central1-a.c.double-zenith-499516-i7.internal.:8088/proxy/application_1785438267430_0001/
+  vcoreSeconds: '1353'

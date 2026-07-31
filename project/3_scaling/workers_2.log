@@ -1,0 +1,88 @@
+Job [db604453413d4f36ad738079f108efe2] submitted.
+Waiting for job output...
+26/07/31 06:14:43 INFO SparkEnv: Registering MapOutputTracker
+26/07/31 06:14:43 INFO SparkEnv: Registering BlockManagerMaster
+26/07/31 06:14:43 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/07/31 06:14:44 INFO SparkEnv: Registering OutputCommitCoordinator
+26/07/31 06:14:45 INFO MetricsConfig: Loaded properties from hadoop-metrics2.properties
+26/07/31 06:14:45 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/07/31 06:14:45 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+26/07/31 06:14:45 INFO DataprocSparkPlugin: Registered 188 driver metrics
+26/07/31 06:14:46 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at cs131-backblaze-w2-m.us-central1-f.c.double-zenith-499516-i7.internal./10.128.0.27:8032
+26/07/31 06:14:47 INFO AHSProxy: Connecting to Application History server at cs131-backblaze-w2-m.us-central1-f.c.double-zenith-499516-i7.internal./10.128.0.27:10200
+26/07/31 06:14:48 INFO Configuration: resource-types.xml not found
+26/07/31 06:14:48 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+26/07/31 06:14:50 INFO YarnClientImpl: Submitted application application_1785478364143_0001
+26/07/31 06:14:51 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at cs131-backblaze-w2-m.us-central1-f.c.double-zenith-499516-i7.internal./10.128.0.27:8030
+26/07/31 06:14:53 INFO GoogleCloudStorageImpl: Ignoring exception of type GoogleJsonResponseException; verified object already exists with desired state.
+26/07/31 06:14:54 INFO GoogleHadoopOutputStream: hflush(): No-op due to rate limit (RateLimiter[stableRate=0.2qps]): readers will *not* yet see flushed data for gs://dataproc-temp-us-central1-40669501508-puhmtkaj/3a1592dc-fa68-49a3-9e92-0848b85140ee/spark-job-history/application_1785478364143_0001.inprogress [CONTEXT ratelimit_period="1 MINUTES" ]
+26/07/31 06:15:16 INFO GhfsGlobalStorageStatistics: periodic connector metrics: {action_http_delete_request=3, action_http_delete_request_duration=158, action_http_delete_request_max=63, action_http_delete_request_mean=52, action_http_delete_request_min=42, action_http_post_request=8, action_http_post_request_duration=661, action_http_post_request_max=148, action_http_post_request_mean=82, action_http_post_request_min=37, action_http_put_request=4, action_http_put_request_duration=500, action_http_put_request_max=155, action_http_put_request_mean=125, action_http_put_request_min=94, directories_created=1, files_created=1, gcs_api_client_non_found_response_count=20, gcs_api_client_precondition_failed_response_count=1, gcs_api_client_side_error_count=21, gcs_api_time=3131, gcs_api_total_request_count=46, gcs_connector_time=3069, gcs_get_other_request=3, gcs_list_dir_request=2, gcs_list_dir_request_duration=163, gcs_list_dir_request_max=94, gcs_list_dir_request_mean=81, gcs_list_dir_request_min=69, gcs_list_file_request=3, gcs_list_file_request_duration=393, gcs_list_file_request_max=291, gcs_list_file_request_mean=131, gcs_list_file_request_min=25, gcs_metadata_request=22, gcs_metadata_request_duration=1167, gcs_metadata_request_max=298, gcs_metadata_request_mean=53, gcs_metadata_request_min=22, gs_filesystem_create=4, gs_filesystem_initialize=3, op_create=1, op_create_duration=199, op_create_max=199, op_create_mean=199, op_create_min=199, op_get_file_status=2, op_get_file_status_duration=915, op_get_file_status_max=823, op_get_file_status_mean=457, op_get_file_status_min=92, op_get_list_status_result_size=365, op_glob_status=1, op_hflush=15, op_hflush_duration=1439, op_hflush_max=484, op_hflush_mean=95, op_list_status=1, op_list_status_duration=195, op_list_status_max=195, op_list_status_mean=195, op_list_status_min=195, op_mkdirs=1, op_mkdirs_duration=321, op_mkdirs_max=321, op_mkdirs_mean=321, op_mkdirs_min=321, stream_write_bytes=1258913, uptimeSeconds=31}
+[CONTEXT ratelimit_period="5 MINUTES" ]
+26/07/31 06:18:48 INFO GoogleHadoopOutputStream: hflush(): No-op due to rate limit (RateLimiter[stableRate=0.2qps]): readers will *not* yet see flushed data for gs://dataproc-temp-us-central1-40669501508-puhmtkaj/3a1592dc-fa68-49a3-9e92-0848b85140ee/spark-job-history/application_1785478364143_0001.inprogress [CONTEXT ratelimit_period="1 MINUTES [skipped: 14]" ]
++--------------------+----------+--------+---------------------------+
+|model               |drive_days|failures|annualized_failure_rate_pct|
++--------------------+----------+--------+---------------------------+
+|TOSHIBA MG08ACA16TEY|1843841   |318     |6.295                      |
+|ST10000NM0086       |367460    |57      |5.6618                     |
+|ST12000NM0007       |366658    |55      |5.4751                     |
+|ST14000NM0138       |467111    |68      |5.3135                     |
+|HGST HUH721212ALN604|3628418   |393     |3.9534                     |
+|HGST HUH728080ALE600|389340    |38      |3.5624                     |
+|ST24000NM002H       |1941010   |146     |2.7455                     |
+|HGST HUH721212ALE604|4853717   |358     |2.6922                     |
+|ST12000NM0008       |6877112   |486     |2.5794                     |
+|TOSHIBA MG07ACA14TEY|324488    |20      |2.2497                     |
+|ST14000NM000J       |117113    |7       |2.1817                     |
+|ST8000NM0055        |4870236   |291     |2.1809                     |
+|WDC WUH721816ALE6L0 |1092886   |59      |1.9705                     |
+|ST8000DM002         |3276650   |156     |1.7378                     |
+|ST14000NM001G       |3849616   |142     |1.3464                     |
+|TOSHIBA MG08ACA16TE |2188375   |79      |1.3176                     |
+|TOSHIBA MG07ACA14TA |13654728  |432     |1.1548                     |
+|ST12000NM001G       |4817914   |127     |0.9621                     |
+|TOSHIBA MG08ACA16TA |14623715  |362     |0.9035                     |
+|WDC WUH721414ALE6L4 |3141290   |70      |0.8134                     |
++--------------------+----------+--------+---------------------------+
+only showing top 20 rows
+
+26/07/31 06:19:15 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/07/31 06:19:17 INFO GoogleCloudStorageImpl: Checking if gs://double-zenith-499516-i7-cs131/phase3_results/workers_2/_temporary is HN enabled returned false
+26/07/31 06:19:17 INFO GoogleCloudStorageFileSystemImpl: Successfully repaired 'gs://double-zenith-499516-i7-cs131/phase3_results/workers_2/' directory.
+CLEANED_ROWS: 117394187
+ELAPSED_SECONDS: 262.99464988708496
+OUTPUT_PATH: gs://double-zenith-499516-i7-cs131/phase3_results/workers_2
+26/07/31 06:19:18 INFO DataprocSparkPlugin: Shutting down driver plugin. metrics=[action_http_patch_request=0, files_created=2, gcs_api_server_timeout_count=0, op_get_list_status_result_size=365, op_open=0, action_http_delete_request=10, gcs_api_time=6689, gcs_backoff_count=0, gcs_api_client_unauthorized_response_count=0, stream_read_close_operations=0, stream_read_bytes_backwards_on_seek=0, gs_filesystem_create=4, exception_count=2, gcs_exception_count=0, gcs_api_total_request_count=109, op_create=2, stream_read_vectored_operations=0, gcs_metadata_request=48, gcs_api_client_bad_request_count=0, action_http_put_request=10, op_create_non_recursive=0, gcs_api_client_gone_response_count=0, gs_filesystem_initialize=3, stream_read_vectored_incoming_ranges=0, stream_write_operations=0, gcs_list_dir_request=3, stream_read_operations=0, gcs_api_client_request_timeout_count=0, op_rename=0, op_get_file_status=3, op_glob_status=1, op_exists=1, stream_write_bytes=9325324, op_xattr_list=0, op_get_delegation_token=0, gcs_api_server_unavailable_count=0, directories_created=2, files_delete_rejected=0, stream_read_vectored_combined_ranges=0, op_xattr_get_named=0, gcs_list_file_request=7, op_hsync=0, action_http_get_request=0, stream_read_operations_incomplete=0, op_delete=2, stream_read_bytes=0, gcs_api_client_non_found_response_count=46, op_list_located_status=0, gcs_api_client_requested_range_not_statisfiable_count=0, op_hflush=72, op_list_status=1, stream_read_vectored_read_bytes_discarded=0, op_xattr_get_named_map=0, gcs_api_client_side_error_count=47, op_get_file_checksum=0, gcs_api_server_internal_error_count=0, stream_read_seek_bytes_skipped=0, stream_write_close_operations=1, gcs_get_media_request=0, gcs_connector_time=5711, files_deleted=2, action_http_post_request=22, op_mkdirs=2, gcs_api_client_rate_limit_error_count=0, op_copy_from_local_file=0, gcs_api_server_bad_gateway_count=0, stream_readVectored_range_duration=0, stream_read_seek_backward_operations=0, gcs_api_server_side_error_count=0, stream_read_seek_operations=0, gcs_get_other_request=9, stream_read_seek_forward_operations=0, gcs_api_client_precondition_failed_response_count=1, op_xattr_get_map=0, delegation_tokens_issued=0, gcs_backoff_time=0, gcs_list_dir_request_min=23, gcs_metadata_request_min=22, op_delete_min=79, op_glob_status_min=0, op_create_non_recursive_min=0, op_hsync_min=0, op_xattr_get_named_min=0, op_xattr_get_named_map_min=0, op_hflush_min=0, op_xattr_list_min=0, action_http_put_request_min=81, op_open_min=0, gcs_list_file_request_min=25, stream_write_close_operations_min=164, op_create_min=70, action_http_delete_request_min=42, op_mkdirs_min=169, op_list_status_min=195, gcs_get_media_request_min=0, stream_readVectored_range_duration_min=0, stream_read_vectored_operations_min=0, stream_read_close_operations_min=0, stream_read_operations_min=0, stream_read_seek_operations_min=0, op_xattr_get_map_min=0, stream_write_operations_min=0, action_http_patch_request_min=0, op_get_file_status_min=49, op_rename_min=0, delegation_tokens_issued_min=0, action_http_post_request_min=32, stream_read_close_operations_max=0, stream_read_seek_operations_max=0, op_hflush_max=484, op_xattr_list_max=0, op_xattr_get_map_max=0, action_http_put_request_max=209, action_http_patch_request_max=0, action_http_post_request_max=148, stream_write_close_operations_max=164, action_http_delete_request_max=63, op_mkdirs_max=321, gcs_get_media_request_max=0, op_rename_max=0, stream_read_vectored_operations_max=0, stream_readVectored_range_duration_max=0, op_xattr_get_named_map_max=0, stream_write_operations_max=0, stream_read_operations_max=0, op_xattr_get_named_max=0, op_glob_status_max=0, op_create_non_recursive_max=0, op_get_file_status_max=823, op_open_max=0, delegation_tokens_issued_max=0, gcs_list_file_request_max=291, gcs_metadata_request_max=298, op_create_max=199, op_delete_max=221, op_list_status_max=195, op_hsync_max=0, gcs_list_dir_request_max=94, op_open_mean=0, op_xattr_list_mean=0, op_rename_mean=0, op_xattr_get_map_mean=0, gcs_list_dir_request_mean=62, op_glob_status_mean=0, stream_read_seek_operations_mean=0, gcs_list_file_request_mean=81, stream_write_operations_mean=0, op_hflush_mean=46, gcs_metadata_request_mean=46, op_list_status_mean=195, stream_read_close_operations_mean=0, op_xattr_get_named_map_mean=0, stream_read_vectored_operations_mean=0, op_mkdirs_mean=245, action_http_post_request_mean=76, stream_write_close_operations_mean=164, action_http_put_request_mean=121, action_http_patch_request_mean=0, op_hsync_mean=0, delegation_tokens_issued_mean=0, action_http_delete_request_mean=50, stream_read_operations_mean=0, op_create_mean=134, op_delete_mean=150, op_create_non_recursive_mean=0, stream_readVectored_range_duration_mean=0, op_xattr_get_named_mean=0, gcs_get_media_request_mean=0, op_get_file_status_mean=321, op_delete_duration=300, op_get_file_status_duration=964, action_http_put_request_duration=1218, stream_write_operations_duration=0, op_hsync_duration=0, gcs_metadata_request_duration=2233, gcs_get_media_request_duration=0, gcs_list_file_request_duration=567, op_list_status_duration=195, op_mkdirs_duration=490, op_open_duration=0, op_create_duration=269, op_hflush_duration=3329, gcs_list_dir_request_duration=186, op_glob_status_duration=0, stream_read_operations_duration=0, action_http_delete_request_duration=505, action_http_post_request_duration=1689, op_rename_duration=0]
+Job [db604453413d4f36ad738079f108efe2] finished successfully.
+done: true
+driverControlFilesUri: gs://dataproc-staging-us-central1-40669501508-e5enm2fi/google-cloud-dataproc-metainfo/3a1592dc-fa68-49a3-9e92-0848b85140ee/jobs/db604453413d4f36ad738079f108efe2/
+driverOutputResourceUri: gs://dataproc-staging-us-central1-40669501508-e5enm2fi/google-cloud-dataproc-metainfo/3a1592dc-fa68-49a3-9e92-0848b85140ee/jobs/db604453413d4f36ad738079f108efe2/driveroutput
+jobUuid: 102b7b82-733c-341b-a174-6bb6db915bf8
+placement:
+  clusterName: cs131-backblaze-w2
+  clusterUuid: 3a1592dc-fa68-49a3-9e92-0848b85140ee
+pysparkJob:
+  args:
+  - gs://double-zenith-499516-i7-cs131/backblaze_2025/*.csv
+  - gs://double-zenith-499516-i7-cs131/phase3_results/workers_2
+  mainPythonFileUri: gs://double-zenith-499516-i7-cs131/scripts/analysis.py
+reference:
+  jobId: db604453413d4f36ad738079f108efe2
+  projectId: double-zenith-499516-i7
+status:
+  state: DONE
+  stateStartTime: '2026-07-31T06:19:20.346966Z'
+statusHistory:
+- state: PENDING
+  stateStartTime: '2026-07-31T06:14:30.641871Z'
+- state: SETUP_DONE
+  stateStartTime: '2026-07-31T06:14:30.728110Z'
+- details: Agent reported job success
+  state: RUNNING
+  stateStartTime: '2026-07-31T06:14:31.240899Z'
+yarnApplications:
+- memoryMbSeconds: '7093945'
+  name: BackblazeFailureAnalysis
+  progress: 1.0
+  state: FINISHED
+  trackingUrl: http://cs131-backblaze-w2-m.us-central1-f.c.double-zenith-499516-i7.internal.:8088/proxy/application_1785478364143_0001/
+  vcoreSeconds: '2092'
